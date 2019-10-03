@@ -9,7 +9,7 @@ cartmsg_ = rosmessage(cartsvc_);
 
 %%
 %Setting the Position for the end effector
-cartmsg_.TargetPoints=[0.2,0.1,-0.02,0.1];
+cartmsg_.TargetPoints=[0.25,0.02,0.05,0.19];
 cartsvc_.call(cartmsg_)
 
 %%
@@ -70,6 +70,23 @@ cartsvc_.call(cartmsg_)
 %%
 cartmsg_.TargetPoints=[0.2,-0.1,0.15,0];
 cartsvc_.call(cartmsg_)
+
+
+
+%%
+
+cartmsg_.TargetPoints=[0.25,0.02,0.13,0.5];
+cartsvc_.call(cartmsg_)
+
+%Gripper Open
+grippermsg_.IsEndEffectorEnabled=1;
+grippermsg_.EndEffectorState=0;
+grippersvc_.call(grippermsg_);
+
+cartmsg_.TargetPoints=[0.25,0.02,0.05,0.5];
+cartsvc_.call(cartmsg_)
+
+
 
 
 

@@ -1,5 +1,5 @@
 function Brobot()
-clc
+clf
 clc
 
 %% Plot Brobot
@@ -12,6 +12,17 @@ base = transl(0,0,0.25); %Puts the base of the robot at this specific coordinate
 Brobot = SerialLink([L1 L2 L3 L4],'name','Brobot','base',base); %setting the parameters of the robot                  
 q = [0,pi/4,-pi/2,pi/4]; %initial positioning of the joints
 scale = 0.5;
-workspace = [-1 1 -1 1 -0.05 1]; %boundary of the working environment
+workspace = [-1 1 -1 1 -0.5 1]; %boundary of the working environment
 Brobot.plot(q,'workspace',workspace,'scale',scale); %plotting the robot
+hold on;
+
+%% Background
+xlabel('x');
+ylabel('y');
+zlabel('z');
+img = imread('UTS.jpg'); 
+xImage = [-1 1; -1 1];
+yImage = [1 1; 1 1];
+zImage = [1 1; -0.5 -0.5];
+surf(xImage,yImage,zImage,'CData',img,'FaceColor','texturemap');
 hold on;
