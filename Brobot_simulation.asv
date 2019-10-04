@@ -95,7 +95,19 @@ hold on;
 
 %% Movement
 steps = 20;
-T1 = transl(-0.25,0.22,0.03);
-q1 = Brobot.ikcon(T1);
-qMatrix = jtraj(q,q1,20);
-Brobot.animate(qMatrix);
+T1 = transl(0.306,0.085,0.609)*rpy2tr(0,-90,-180);      
+q1 = Brobot.ikine(T1,q,[1,1,1,0,1,1])
+T2 = transl(0,0.25,-0.04923);          
+q2 = Brobot.ikine(T2,q,[1,1,1,0,0,0])                                            
+
+%Interpolation
+sx = lspb(0,1,steps);
+intQYMatrix = nan(steps,6);
+    for i = 1:steps
+        intQYMatrix(i,:) = (1-sx(i))*q1 + sx(i)*q2;  
+    end
+
+%Generates Track
+rh = findobj('Tag', Brobot.name); ud = rh.UserData; hold on;
+ud.trail = plot(0,0,'b.'); set(rh,'UserData',ud);
+Brobot.plot(intQYMatrix);
