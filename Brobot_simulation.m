@@ -40,8 +40,8 @@ end
 vertexColours = [topH.vertex.red, topH.vertex.green, topH.vertex.blue]/255;
 hold on;
 for zOffset = [-0.6,-0.6]
-    for xOffset = [0.9,0.9]   
-        for yOffset = [-1,-1]
+    for xOffset = [-1.1,-1.1]   
+        for yOffset = [-1.05,-1.05]
             trisurf(f,v(:,1)+ xOffset,v(:,2)+ yOffset,v(:,3) + zOffset...
             ,'FaceVertexCData',vertexColours,'EdgeColor','interp','EdgeLighting','flat');
         end
@@ -51,7 +51,7 @@ hold on;
 
 %Caution Poster
 img = imread('caution.jpg'); 
-xImage = [1.19 1.19; 1.19 1.19];
+xImage = [-1.19 -1.19; -1.19 -1.19];
 yImage = [-1.125 -0.875; -1.125 -0.875];
 zImage = [0.5 0.5; 0.25 0.25];
 surf(xImage,yImage,zImage,'CData',img,'FaceColor','texturemap');

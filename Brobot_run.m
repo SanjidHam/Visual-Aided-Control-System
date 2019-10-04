@@ -85,8 +85,3 @@ grippersvc_.call(grippermsg_);
 
 cartmsg_.TargetPoints=[0.25,0.02,0.05,0.5];
 cartsvc_.call(cartmsg_)
-
-
-
-
-
