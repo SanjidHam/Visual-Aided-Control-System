@@ -9,22 +9,27 @@ cartmsg_ = rosmessage(cartsvc_);
 
 %%
 %Setting the Position for the end effector
-cartmsg_.TargetPoints=[0.25,0.02,0.05,0.19];
-cartsvc_.call(cartmsg_)
+% cartmsg_.TargetPoints=[0.25,0,0.05,0];
+% cartsvc_.call(cartmsg_)
+% 
+% cartmsg_.TargetPoints=[0,0.25,0.05,0];
+% cartsvc_.call(cartmsg_)
 
+cartmsg_.TargetPoints=[0.1,0.2,0.04,0];
+cartsvc_.call(cartmsg_)
 %%
 %Gripper Variables Setup
 grippersvc_ = rossvcclient('/dobot_magician/end_effector/set_gripper');
 grippermsg_ = rosmessage(grippersvc_);
 
 %%
-%Turn ON Gripper
+%Turn ON Suction
 grippermsg_.IsEndEffectorEnabled=1;
 grippermsg_.EndEffectorState=1;
 grippersvc_.call(grippermsg_);
 
 %%
-%Turn OFF Gripper
+%Turn OFF Suction
 grippermsg_.IsEndEffectorEnabled=0;
 grippermsg_.EndEffectorState=0;
 grippersvc_.call(grippermsg_);
