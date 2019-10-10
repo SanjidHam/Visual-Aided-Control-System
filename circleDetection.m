@@ -1,35 +1,20 @@
-%% View Image
-clear all;
-colorDevice = imaq.VideoDevice('kinect',1);
-depthDevice = imaq.VideoDevice('kinect',2);
-  
-colorDevice();
-depthDevice();
-  
-colorImage = colorDevice();
-depthImage = depthDevice();
-  
-ptCloud = pcfromkinect(depthDevice, depthImage, colorImage);
-
-release(colorDevice);
-release(depthDevice);
-idisp(colorImage);
-
-
 %% Circle detection
 % I = colorImage;
-rgb = imread('coloredChips.png');
-% rgb = imread('c.jpg');
-idisp(rgb)
-% rgb = imcrop(I,[1220 500 500]); %[initial u ,initial v,Length, width] %Image crop
+rgb = imread('circle_SL.jpg');
+% rgb = imread('circle_tray.jpg');
+
+figure, idisp(rgb)
+% rgb = imcrop(rgb,[1214 383 600 600]); %[initial u ,initial v,Length, width] %Image crop for circle_SL.jpg
+
+% rgb = imcrop(rgb,[770 8 700 700]); %[initial u ,initial v,Length, width] %Image crop for circle_tray.jpg
 
 gray_image = rgb2gray(rgb);
-imshow(gray_image)
+figure, imshow(gray_image)
 
 [~,~] = imfindcircles(rgb,[20 25],'ObjectPolarity','dark');
 [centers,radii] = imfindcircles(rgb,[20 25],'ObjectPolarity','dark', ...
     'Sensitivity',0.9);
-imshow(rgb)
+figure, imshow(rgb)
 h = viscircles(centers,radii);
 
 [centers,radii] = imfindcircles(rgb,[20 25],'ObjectPolarity','dark', ...
@@ -50,22 +35,22 @@ h = viscircles(centers,radii);
 
 delete(h)
 viscircles(centers,radii);
-% imshow(gray_image)
-% 
-% [centersBright,radiiBright] = imfindcircles(rgb,[20 25], ...
-%     'ObjectPolarity','bright','Sensitivity',0.92);
-% 
-% imshow(rgb)
-% 
-% hBright = viscircles(centersBright, radiiBright,'Color','b');
-% 
-% [centersBright,radiiBright,metricBright] = imfindcircles(rgb,[20 25], ...
-%     'ObjectPolarity','bright','Sensitivity',0.92,'EdgeThreshold',0.1);
-% 
-% delete(hBright)
-% hBright = viscircles(centersBright, radiiBright,'Color','b');
-% 
-% h = viscircles(centers,radii);
+figure, imshow(gray_image)
+
+[centersBright,radiiBright] = imfindcircles(rgb,[20 25], ...
+    'ObjectPolarity','bright','Sensitivity',0.92);
+
+figure, imshow(rgb)
+
+hBright = viscircles(centersBright, radiiBright,'Color','b');
+
+[centersBright,radiiBright,metricBright] = imfindcircles(rgb,[20 25], ...
+    'ObjectPolarity','bright','Sensitivity',0.92,'EdgeThreshold',0.1);
+
+delete(hBright)
+hBright = viscircles(centersBright, radiiBright,'Color','b');
+
+h = viscircles(centers,radii);
 
 % %% Square Recognition
 % 
