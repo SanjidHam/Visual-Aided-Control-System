@@ -1,0 +1,8 @@
+%% Initialise cam
+cam = webcam('c922');
+
+%% Image Capture
+cam.Resolution = '2304x1536';
+img = snapshot(cam);
+imshow(img);
+% clear('cam');
