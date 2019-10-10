@@ -40,32 +40,44 @@ end
 vertexColours = [topH.vertex.red, topH.vertex.green, topH.vertex.blue]/255;
 hold on;
 for zOffset = [-0.6,-0.6]
-    for xOffset = [-1.1,-1.1]   
+    for xOffset = [1.05,1.05]   
         for yOffset = [-1.05,-1.05]
             trisurf(f,v(:,1)+ xOffset,v(:,2)+ yOffset,v(:,3) + zOffset...
             ,'FaceVertexCData',vertexColours,'EdgeColor','interp','EdgeLighting','flat');
         end
     end
 end
+
+[f,v,data] = plyread('stopbuttonbase.ply','tri');
+vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
+for zOffset = [-0.6,-0.6]
+    for xOffset = [1.05,1.05]   
+        for yOffset = [-1.05,-1.05]
+        trisurf(f,v(:,1)+ xOffset,v(:,2) + yOffset, v(:,3) + zOffset ...
+            ,'FaceVertexCData',vertexColours,'EdgeColor','interp','EdgeLighting','flat');
+        end
+    end
+end
+
 hold on;
 
 %Caution Poster
 img = imread('caution.jpg'); 
-xImage = [-1.19 -1.19; -1.19 -1.19];
-yImage = [-1.125 -0.875; -1.125 -0.875];
+xImage = [1.125 0.875; 1.125 0.875];
+yImage = [1.19 1.19; 1.19 1.19];
 zImage = [0.5 0.5; 0.25 0.25];
 surf(xImage,yImage,zImage,'CData',img,'FaceColor','texturemap');
 
 %% BACKGROUND
 %Walls
-img = imread('UTS.jpg'); 
+img = imread('grey.jpg'); 
 xImage = [-1.2 1.2; -1.2 1.2];
 yImage = [1.2 1.2; 1.2 1.2];
 zImage = [1 1; -0.6 -0.6];
 surf(xImage,yImage,zImage,'CData',img,'FaceColor','texturemap');
 
 
-img = imread('grey.jpg'); 
+img = imread('smartFactory.jpg'); 
 xImage = [-1.2 -1.2; -1.2 -1.2];
 yImage = [-1.2 1.2; -1.2 1.2];
 zImage = [1 1; -0.6 -0.6];
@@ -94,8 +106,8 @@ end
 hold on;
 
 %% Movement
-steps = 20;
-T1 = transl(-0.25,0.22,0.03);
-q1 = Brobot.ikcon(T1);
-qMatrix = jtraj(q,q1,20);
-Brobot.animate(qMatrix);
+% steps = 20;
+% T1 = transl(-0.25,0.22,0.03);
+% q1 = Brobot.ikcon(T1);
+% qMatrix = jtraj(q,q1,20);
+% Brobot.animate(qMatrix);

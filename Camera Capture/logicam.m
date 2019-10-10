@@ -1,5 +1,5 @@
 %% Initialise cam
-cam = webcam('c922');
+cam = webcam(2);
 
 %% Image Capture
 cam.Resolution = '640x360';
