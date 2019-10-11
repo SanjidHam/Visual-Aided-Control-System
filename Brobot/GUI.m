@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 11-Oct-2019 19:41:34
+% Last Modified by GUIDE v2.5 11-Oct-2019 23:16:17
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -142,22 +142,23 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in playButton.
+function playButton_Callback(hObject, eventdata, handles)
+% hObject    handle to playButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+disp('brobotRun');
 
-
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
+% --- Executes on button press in pauseButton.
+function pauseButton_Callback(hObject, eventdata, handles)
+% hObject    handle to pauseButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+disp('Operation Paused');
 
-
-% --- Executes on button press in pushbutton3.
-function pushbutton3_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton3 (see GCBO)
+% --- Executes on button press in stopButton.
+function stopButton_Callback(hObject, eventdata, handles)
+% hObject    handle to stopButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+ disp('EMERGENCY STOP ACTIVATED');
