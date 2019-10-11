@@ -7,19 +7,15 @@ clc
 scale = 0.5;
 workspace = [-1.2 1.2 -1.2 1.2 -0.6 1]; %boundary of the working environment
 
-L1 = Link('d',0.08,'a',0,'alpha',-pi/2,'qlim',[deg2rad(-135) deg2rad(135)]);
-L2 = Link('d',0,'a',0.14,'alpha',0,'qlim',[deg2rad(5) deg2rad(80)],'offset', -pi/2);
-L3 = Link('d',0,'a',0.16,'alpha',0,'qlim',[deg2rad(15) deg2rad(170)]);
-L4 = Link('d',0,'a',0.05,'alpha',pi/2,'qlim',[deg2rad(-90) deg2rad(90)]);
-L5 = Link('d',-0.05,'a',0,'alpha',0,'qlim',[deg2rad(-85) deg2rad(85)]);
+L1 = Link('d',0.08,'a',0,'alpha',pi/2,'qlim',[deg2rad(-90) deg2rad(90)]);
+L2 = Link('d',0,'a',0.14,'alpha',0,'qlim',[deg2rad(0) deg2rad(85)]);
+L3 = Link('d',0,'a',0.16,'alpha',0,'qlim',[deg2rad(10) deg2rad(95)]);
+L4 = Link('d',0,'a',0.05,'alpha',-pi/2,'qlim',[deg2rad(90) deg2rad(-90)]); 
 
 base = transl(0,0,0); %Puts the base of the robot at this specific coordinate. 
-Brobot = SerialLink([L1 L2 L3 L4 L5],'name','Brobot','base',base); %setting the parameters of the robot                  
+Brobot = SerialLink([L1 L2 L3 L4],'name','Brobot','base',base); %setting the parameters of the robot                  
 
-% q = [0,3*pi/4,pi/4,0,0]; %initial positioning of the joints
-
-T = transl(0.25,0,0.15);
-q = Brobot.ikcon(T);
+q = [0,pi/4,-pi/2,pi/4]; %initial positioning of the joints
 
 Brobot.plot(q,'workspace',workspace,'scale',scale); %plotting the robot
 hold on
@@ -43,9 +39,9 @@ end
 [f,v,topH] = plyread('stop.ply','tri');
 vertexColours = [topH.vertex.red, topH.vertex.green, topH.vertex.blue]/255;
 hold on;
-for xOffset = [-1.19, -1.19]
+for xOffset = [1.05,1.05]
     for zOffset =  [0,0]  
-        for yOffset = [-1.0,-1.0]
+        for yOffset = [-1.05,-1.05]
             trisurf(f,v(:,3)+ xOffset,v(:,1)+ yOffset,v(:,2) + zOffset...
             ,'FaceVertexCData',vertexColours,'EdgeColor','interp','EdgeLighting','flat');
         end
@@ -54,9 +50,9 @@ end
 
 [f,v,data] = plyread('stopbuttonbase.ply','tri');
 vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
-for xOffset = [-1.19, -1.19]
+for xOffset = [1.05,1.05]
     for zOffset = [0,0]   
-        for yOffset = [-1.0,-1.0]
+        for yOffset = [-1.05,-1.05]
         trisurf(f,v(:,3)+ xOffset,v(:,1) + yOffset, v(:,2) + zOffset ...
             ,'FaceVertexCData',vertexColours,'EdgeColor','interp','EdgeLighting','flat');
         end
@@ -67,15 +63,15 @@ hold on;
 
 %Caution Poster
 img = imread('caution.jpg'); 
-xImage = [-1.19 -1.19; -1.19 -1.19];
-yImage = [-1.125 -0.875; -1.125 -0.875];
+xImage = [1.125 0.875; 1.125 0.875];
+yImage = [-1.19 -1.19; -1.19 -1.19];
 zImage = [0.5 0.5; 0.25 0.25];
 surf(xImage,yImage,zImage,'CData',img,'FaceColor','texturemap');
 
 %% BACKGROUND
 %Walls
 img = imread('grey.jpg'); 
-xImage = [-1.2 -1.2; -1.2 -1.2];
+xImage = [1.2 1.2; 1.2 1.2];
 yImage = [-1.2 1.2; -1.2 1.2];
 zImage = [1 1; -0.6 -0.6];
 surf(xImage,yImage,zImage,'CData',img,'FaceColor','texturemap');
@@ -110,33 +106,8 @@ end
 hold on;
 
 %% Movement
-s = 20;
-T1 = transl(-0.25,0.18,0.15);
-q1 = Brobot.ikcon(T1);
-qMatrix = jtraj(q,q1,s);
-Brobot.animate(qMatrix);
-
-T2 = transl(-0.25,0.18,0.05);
-q2 = Brobot.ikcon(T2);
-qMatrix = jtraj(q1,q2,s);
-Brobot.animate(qMatrix);
-
-T3 = transl(-0.25,0.18,0.15);
-q3 = Brobot.ikcon(T3);
-qMatrix = jtraj(q2,q3,s);
-Brobot.animate(qMatrix);
-
-T4 = transl(0.22,0.15,0.15);
-q4 = Brobot.ikcon(T4);
-qMatrix = jtraj(q3,q4,s);
-Brobot.animate(qMatrix);
-
-T5 = transl(0.22,0.15,0.05);
-q5 = Brobot.ikcon(T5);
-qMatrix = jtraj(q4,q5,s);
-Brobot.animate(qMatrix);
-
-T6 = transl(0.22,0.15,0.15);
-q6 = Brobot.ikcon(T6);
-qMatrix = jtraj(q5,q6,s);
-Brobot.animate(qMatrix);
+% steps = 20;
+% T1 = transl(-0.25,0.22,0.03);
+% q1 = Brobot.ikcon(T1);
+% qMatrix = jtraj(q,q1,20);
+% Brobot.animate(qMatrix);
