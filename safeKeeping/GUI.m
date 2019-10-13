@@ -180,30 +180,30 @@ function playButton_Callback(hObject, eventdata, handles)
 % hObject    handle to playButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+Brobot = plotBrobot();
 disp('Brobot Activated!');
-Brobot = moveBrobot();
 
 % --- Executes on button press in resumeButton.
 function resumeButton_Callback(hObject, eventdata, handles)
 % hObject    handle to resumeButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-disp('Operation Resumed...');
 uiresume;
+disp('Operation Resumed...');
 
 % --- Executes on button press in stopButton.
 function stopButton_Callback(hObject, eventdata, handles)
 % hObject    handle to stopButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+uiwait; 
 disp('EMERGENCY STOP ACTIVATED!!');
-uiwait;
 
 % --- Executes on button press in teachButton.
 function teachButton_Callback(hObject, eventdata, handles)
 % hObject    handle to teachButton (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-disp('Move Brobot as you wish');
 Brobot = plotBrobot();
 Brobot.teach;
+disp('Move Brobot as you wish');
