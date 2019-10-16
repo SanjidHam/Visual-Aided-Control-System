@@ -1,16 +1,12 @@
-[f,v,data] = plyread('stop.ply','tri');
-vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue]/255;
-hold on;
-for xOffset = [-1.19, -1.19]
-    for zOffset =  [0,0]  
-        for yOffset = [-1.0,-1.0]
-            trisurf(f,v(:,3)+ xOffset,v(:,1)+ yOffset,v(:,2) + zOffset...
-            ,'FaceVertexCData',vertexColours,'EdgeColor','interp','EdgeLighting','flat');
-        end
-    end
+function move(self, pose)
+            forwardTR = makehgtform('translate',pose);
+            self.objectPose = self.objectPose*forwardTR; %update the location
+            updatedPoints = [self.objectPose * [self.objectVerts,ones(self.objectVertexCount,1)]']';  %update the location
+            self.objectMesh_h.Vertices = updatedPoints(:,1:3);
 end
-
 objectVertexCount = size(v,3);%%%%get
+midPoint = sum(v)/objectVertexCount;
+objectPose = eye(4); % create the matrix 4x4 for partpose
 objectVerts = v - repmat(midPoint,objectVertexCount,1);%%%%get
             
         
