@@ -47,7 +47,7 @@ hold on;
 
 %% Demo Accessories
 %Small Circle
-[f,v,data] = plyread('circleS.ply','tri');
+[f,v,data] = plyread('circleSmall.ply','tri');
 objectVertexCount = size(v,1);%%%%get
 midPoint = sum(v)/objectVertexCount;
 objectPose = eye(4); % create the matrix 4x4 for partpose
