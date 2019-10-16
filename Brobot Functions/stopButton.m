@@ -1,7 +1,7 @@
 function [] = stopButton()
 
-[f,v,topH] = plyread('stop.ply','tri');
-vertexColours = [topH.vertex.red, topH.vertex.green, topH.vertex.blue]/255;
+[f,v,data] = plyread('stop.ply','tri');
+vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue]/255;
 hold on;
 for xOffset = [-1.19, -1.19]
     for zOffset =  [0,0]  
