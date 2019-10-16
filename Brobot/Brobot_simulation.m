@@ -19,6 +19,19 @@ laser;
 %Stop Button
 stopButton;
 
+%Object Placement
+[f,v,data] = plyread('stop.ply','tri');
+vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue]/255;
+hold on;
+for zOffset = [-0.05073,-0.05073]
+    for xOffset =  [0,0]  
+        for yOffset = [0.25,0.25]
+            trisurf(f,v(:,1)+ xOffset,v(:,2)+ yOffset,v(:,3) + zOffset...
+            ,'FaceVertexCData',vertexColours,'EdgeColor','interp','EdgeLighting','flat');
+        end
+    end
+end
+
 %Fire Extinguisher
 fireExtinguisher;
 
