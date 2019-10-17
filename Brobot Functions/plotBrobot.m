@@ -12,9 +12,9 @@ L5 = Link('d',-0.05,'a',0,'alpha',0,'qlim',[deg2rad(-85) deg2rad(85)]);
 
 
 base = transl(0,0,0); %Puts the base of the robot at this specific coordinate. 
-Brobot = SerialLink([L1 L2 L3 L4 L5],'name','Brobot','base',base); %setting the parameters of the robot      
+Brobot = SerialLink([L1 L2 L3 L4 L5],'name','THE BROBOT','base',base); %setting the parameters of the robot      
 
-T = transl(0.25,0,0.15);
+T = transl(0,-0.25,0.2);
 q = Brobot.ikcon(T);
 
 Brobot.plot(q,'workspace',workspace,'scale',scale); %plotting the robot

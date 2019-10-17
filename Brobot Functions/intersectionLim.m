@@ -1,14 +1,17 @@
 %% 1 intersect 
 function intersectionLim()
-plotOptions.plotFaces = true;
-[vertex,faces,faceNormals] = RectangularPrism([0,0,-0.5], [1,0.3,0.6],plotOptions);
+Brobot = plotBrobot;
+T = transl(0.25,0,0.2);
+q = Brobot.ikcon(T);
+plotOptions.plotFaces = true; %limit opacity
+[vertex,faces,faceNormals] = RectangularPrism([-0.15,-0.25,0], [0.6,0.5,0.5],plotOptions);
 hold on
 
 % 2.4: Get the transform of every joint (i.e. start and end of every link)
-tr = zeros(4,4,robot.n+1);
-tr(:,:,1) = robot.base;
-L = robot.links;
-for i = 1 : robot.n
+tr = zeros(4,4,Brobot.n+1);
+tr(:,:,1) = Brobot.base;
+L = Brobot.links;
+for i = 1 : Brobot.n
     tr(:,:,i+1) = tr(:,:,i) * trotz(q(i)+L(i).offset) * transl(0,0,L(i).d) * transl(L(i).a,0,0) * trotx(L(i).alpha);
 end
 
