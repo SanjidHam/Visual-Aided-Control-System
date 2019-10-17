@@ -30,7 +30,7 @@ tableSurface;
 
 %% Demo Accessories
 %Small Circle
-demoObject = placeCircle;
+% demoObject = placeCircle;
 
 %% If camera detects Circle
 moveforCircle;
