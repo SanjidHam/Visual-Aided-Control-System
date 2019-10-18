@@ -22,7 +22,7 @@ function varargout = GUI(varargin)
 
 % Edit the above text to modify the response to help GUI
 
-% Last Modified by GUIDE v2.5 18-Oct-2019 14:33:18
+% Last Modified by GUIDE v2.5 18-Oct-2019 16:34:04
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -645,27 +645,8 @@ Brobot = plotBrobot;
 
 %% intersect
 plotOptions.plotFaces = false;
-[vertex,faces,faceNormals] = RectangularPrism([0.3,-0.3,-0.03073], [-0.28,0.3,0.4493],plotOptions);
+[vertex,faces,faceNormals] = RectangularPrism([0.3,-0.3,-0.03073], [-0.25,0.3,0.4493],plotOptions);
 hold on
-% % 2.4: Get the transform of every joint (i.e. start and end of every link)
-% tr = zeros(4,4,Brobot.n+1);
-% tr(:,:,1) = Brobot.base;
-% L = Brobot.links;
-% for i = 1 : Brobot.n
-%     tr(:,:,i+1) = tr(:,:,i) * trotz(q(i)+L(i).offset) * transl(0,0,L(i).d) * transl(L(i).a,0,0) * trotx(L(i).alpha);
-% end
-% 
-% % 2.5: Go through each link and also each triangle face
-% for i = 1 : size(tr,3)-1    
-%     for faceIndex = 1:size(faces,1)
-%         vertOnPlane = vertex(faces(faceIndex,1)',:);
-%         [intersectP,check] = LinePlaneIntersection(faceNormals(faceIndex,:),vertOnPlane,tr(1:3,4,i)',tr(1:3,4,i+1)'); 
-%         if check == 1 && IsIntersectionPointInsideTriangle(intersectP,vertex(faces(faceIndex,:)',:))
-%             plot3(intersectP(1),intersectP(2),intersectP(3),'r*');
-%             display('Collision Detected');
-%         end
-%     end    
-% end
 %%
 t1 = transl(0,-0.25,0.2);
 q1 = Brobot.ikcon(t1);
@@ -682,6 +663,84 @@ qMatrix = jtraj(q1,q2,steps);
 result = true(steps,1);
 for i = 1: steps
     %%
+    result(i) = IsCollision(Brobot,qMatrix(i,:),faces,vertex,faceNormals,false);
+    Brobot.animate(qMatrix(i,:));
+end
+%%
+result = IsIntersectionPointInsideTriangle(intersectP,triangleVerts);
+%% IsCollision
+% This is based upon the output of questions 2.5 and 2.6
+% Given a robot model (robot), and trajectory (i.e. joint state vector) (qMatrix)
+% and triangle obstacles in the environment (faces,vertex,faceNormals)
+result = IsCollision(Brobot,qMatrix,faces,vertex,faceNormals,returnOnceFound);  
+%% GetLinkPoses
+% q - robot joint angles
+% robot -  seriallink robot model
+% transforms - list of transforms
+[ transforms ] = GetLinkPoses( q, Brobot);
+%% FineInterpolation
+% Use results from Q2.6 to keep calling jtraj until all step sizes are
+% smaller than a given max steps size
+qMatrix = FineInterpolation(q1,q2,maxStepRadians);
+
+function edit28_Callback(hObject, eventdata, handles)
+% hObject    handle to edit28 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit28 as text
+%        str2double(get(hObject,'String')) returns contents of edit28 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit28_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit28 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in instobjButton.
+function instobjButton_Callback(hObject, eventdata, handles)
+% hObject    handle to instobjButton (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+disp ('Collision Detection Simulation Started..');
+
+PX = str2double(handles.Pos_X.String);
+PY = str2double(handles.Pos_Y.String);
+PZ = str2double(handles.Pos_Z.String);
+
+Brobot = plotBrobot;
+
+%% generate object
+centerpnt = [0.7,0,0];
+side = 0.2;
+plotOptions.plotFaces = true;
+%%
+t1 = transl(0,-0.25,0.2);
+q1 = Brobot.ikcon(t1);
+t2 = transl(PX,PY,PZ);
+q2 = Brobot.ikcon(t2);
+vel=0.02;
+steps = 2;
+while ~isempty(find(1 < abs(diff(rad2deg(jtraj(q1,q2,steps)))),1))
+    steps = steps + 1;
+end
+qMatrix = jtraj(q1,q2,steps);
+% 2.7
+result = true(steps,1);
+for i = 1: steps
+    vel=vel+0.002;
+    [vertex,faces,faceNormals] = RectangularPrismObstacle(vel+centerpnt-side/2, vel+centerpnt+side/2,plotOptions);
+    try delete(p); end
+    tcolor = [.2 .2 .8];
+    p = patch('Faces',faces,'Vertices',vertex,'FaceVertexCData',tcolor,'FaceColor','flat','lineStyle','none');
     result(i) = IsCollision(Brobot,qMatrix(i,:),faces,vertex,faceNormals,false);
     Brobot.animate(qMatrix(i,:));
 end
