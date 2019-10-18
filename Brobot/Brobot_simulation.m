@@ -41,7 +41,7 @@ demoObject2 = placeSquare;
 
 
 %% Camera Detection Starts
-% disp ('Camera Detecting Missing Shape');
-% pause (2);
-% promptCamera;
+disp ('Camera Detecting Missing Shape');
+pause (2);
+promptCamera;
 end
