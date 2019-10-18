@@ -12,7 +12,7 @@ qH = Brobot.ikcon(TH);
 qMatrix = jtraj(q,qH,steps);
 Brobot.animate(qMatrix);
 
-disp ('Square Detected.');
+disp ('Large Square Detected.');
 %Move for object
 T1 = transl(0.1258,0.2773,0.2);
 q1 = Brobot.ikcon(T1);

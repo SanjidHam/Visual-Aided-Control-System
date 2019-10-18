@@ -12,7 +12,7 @@ if missingShape == 1
     pause (0.5);
     promptCamera ();
 elseif missingShape == 2
-    moveforHex;
+    moveforSquare;
     pause (0.1);
     disp ('Camera checking for other missing shapes.');
     pause (0.5);
