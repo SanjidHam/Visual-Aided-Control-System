@@ -719,7 +719,7 @@ PZ = str2double(handles.Pos_Z.String);
 Brobot = plotBrobot;
 
 %% generate object
-centerpnt = [0.7,0,0];
+centerpnt = [0.3,0,0];
 side = 0.2;
 plotOptions.plotFaces = true;
 %%
