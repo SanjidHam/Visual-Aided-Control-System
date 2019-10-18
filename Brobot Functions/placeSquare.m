@@ -1,4 +1,4 @@
-classdef placeHex
+classdef placeSquare
 
 properties (SetAccess = private)
 objectVertexCount;
@@ -9,16 +9,16 @@ end
     
 methods
 %% Places Object on workspace
-function self = placeHex()
-[f,v,data] = plyread('hexagon.ply','tri');
+function self = placeSquare()
+[f,v,data] = plyread('squareLarge.ply','tri');
 self.objectVertexCount = size(v,1);
 midPoint = sum(v)/self.objectVertexCount;
 self.objectPose = eye(4); % creates the matrix 4x4 for partpose
 self.vNew = v - repmat(midPoint,self.objectVertexCount,1);
 vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue]/255;
-for zOffset = [0.08,0.08]
-    for xOffset = [0.15,0.15]   
-        for yOffset = [0.2,0.2]
+for zOffset = [0.06927,0.06927]
+    for xOffset = [0.1258,0.1258]   
+        for yOffset = [0.2773,0.2773]
             self.objectMesh = trisurf(f,self.vNew(:,1)+ xOffset,self.vNew(:,2)+ yOffset,self.vNew(:,3) + zOffset...
             ,'FaceVertexCData',vertexColours,'EdgeColor','interp','EdgeLighting','flat');
         end

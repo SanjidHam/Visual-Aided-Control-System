@@ -37,7 +37,7 @@ primaryTray;
 secondaryTray;
 %Small Circle
 demoObject1 = placeCircle;
-demoObject2 = placeHex;
+demoObject2 = placeSquare;
 
 % %% Collision Detection
 % %1

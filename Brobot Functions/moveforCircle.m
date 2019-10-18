@@ -19,7 +19,7 @@ q1 = Brobot.ikcon(T1);
 qMatrix = jtraj(qH,q1,steps);
 Brobot.animate(qMatrix);
 
-T2 = transl(0.03,0.23,0.085); %%change height
+T2 = transl(0.03,0.23,0.085);
 q2 = Brobot.ikcon(T2);
 qMatrix = jtraj(q1,q2,steps);
 % Brobot.animate(qMatrix);
@@ -62,7 +62,7 @@ for trajsteps = 1:size(qMatrix,1)
     pause(0);
 end
 
-T4 = transl(0.1806,-0.01,0.2);
+T4 = transl(0.1806,-0.181,0.2);
 q4 = Brobot.ikcon(T4);
 qMatrix = jtraj(q3,q4,steps);
 % Brobot.animate(qMatrix);
@@ -76,7 +76,7 @@ for trajsteps = 1:size(qMatrix,1)
     pause(0);
 end
 
-T5 = transl(0.1806,-0.006013,0.085);
+T5 = transl(0.1806,-0.181,0.085);
 q5 = Brobot.ikcon(T5);
 qMatrix = jtraj(q4,q5,steps);
 % Brobot.animate(qMatrix);
@@ -90,7 +90,7 @@ for trajsteps = 1:size(qMatrix,1)
     pause(0);
 end
 
-T6 = transl(0.1806,-0.01,0.2);
+T6 = transl(0.1806,-0.181,0.2);
 q6 = Brobot.ikcon(T6);
 qMatrix = jtraj(q5,q6,steps);
 Brobot.animate(qMatrix);

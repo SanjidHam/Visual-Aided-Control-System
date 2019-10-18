@@ -1,9 +1,9 @@
-function [] = moveforHex()
-demoObject2 = placeHex;
+function [] = moveforSquare()
+demoObject2 = placeSquare;
 Brobot = plotBrobot;
 T = transl(0,-0.25,0.2);
 q = Brobot.ikcon(T);
-%% Movement for Hexagon
+%% Movement for Square
 steps = 20;
 
 %HOME
@@ -12,14 +12,14 @@ qH = Brobot.ikcon(TH);
 qMatrix = jtraj(q,qH,steps);
 Brobot.animate(qMatrix);
 
-disp ('Hexagon Detected.');
+disp ('Square Detected.');
 %Move for object
-T1 = transl(0.15,0.2,0.2);
+T1 = transl(0.1258,0.2773,0.2);
 q1 = Brobot.ikcon(T1);
 qMatrix = jtraj(qH,q1,steps);
 Brobot.animate(qMatrix);
 
-T2 = transl(0.15,0.2,0.1);
+T2 = transl(0.1258,0.2773,0.085);
 q2 = Brobot.ikcon(T2);
 qMatrix = jtraj(q1,q2,steps);
 % Brobot.animate(qMatrix);
@@ -33,7 +33,7 @@ for trajsteps = 1:size(qMatrix,1)
     pause(0);
 end
 
-T3 = transl(0.15,0.2,0.2);
+T3 = transl(0.1258,0.2773,0.2);
 q3 = Brobot.ikcon(T3);
 qMatrix = jtraj(q2,q3,steps);
 %Brobot.animate(qMatrix);
@@ -47,7 +47,7 @@ for trajsteps = 1:size(qMatrix,1)
     pause(0);
 end
 
-T4 = transl(0.18,0,0.2);
+T4 = transl(0.2754,-0.2307,0.2);
 q4 = Brobot.ikcon(T4);
 qMatrix = jtraj(q3,q4,steps);
 % Brobot.animate(qMatrix);
@@ -61,7 +61,7 @@ for trajsteps = 1:size(qMatrix,1)
     pause(0);
 end
 
-T5 = transl(0.18,0,0.1);
+T5 = transl(0.2754,-0.2307,0.085);
 q5 = Brobot.ikcon(T5);
 qMatrix = jtraj(q4,q5,steps);
 % Brobot.animate(qMatrix);
@@ -75,7 +75,7 @@ for trajsteps = 1:size(qMatrix,1)
     pause(0);
 end
 
-T6 = transl(0.18,0,0.2);
+T6 = transl(0.2754,-0.2307,0.2);
 q6 = Brobot.ikcon(T6);
 qMatrix = jtraj(q5,q6,steps);
 Brobot.animate(qMatrix);

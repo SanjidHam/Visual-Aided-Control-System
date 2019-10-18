@@ -5,15 +5,13 @@
 function promptCamera ()
 
 missingShape = input('Missing Shape:');
-if missingShape == 1
-    disp ('Large Circle Detected');    
+if missingShape == 1   
     moveforCircle;
     pause (0.1);
     disp ('Camera checking for other missing shapes.');
     pause (0.5);
     promptCamera ();
 elseif missingShape == 2
-    disp ('Hexagon Detected');
     moveforHex;
     pause (0.1);
     disp ('Camera checking for other missing shapes.');
