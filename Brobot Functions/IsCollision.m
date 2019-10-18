@@ -20,7 +20,7 @@ for qIndex = 1:size(qMatrix,1)
             if check == 1 && IsIntersectionPointInsideTriangle(intersectP,vertex(faces(faceIndex,:)',:))
                 plot3(intersectP(1),intersectP(2),intersectP(3),'r*');
                 display('Collision Detected');
-                %%robot function
+                %stop robot
                 result = true;
                 if returnOnceFound
                     return

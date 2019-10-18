@@ -644,9 +644,10 @@ PZ = str2double(handles.Pos_Z.String);
 Brobot = plotBrobot;
 
 %% intersect
-plotOptions.plotFaces = false;
+plotOptions.plotFaces = true;
 [vertex,faces,faceNormals] = RectangularPrism([0.3,-0.3,-0.03073], [-0.28,0.3,0.4493],plotOptions);
 hold on
+
 % % 2.4: Get the transform of every joint (i.e. start and end of every link)
 % tr = zeros(4,4,Brobot.n+1);
 % tr(:,:,1) = Brobot.base;
@@ -667,17 +668,21 @@ hold on
 %     end    
 % end
 %%
+
 t1 = transl(0,-0.25,0.2);
-q1 = Brobot.ikcon(t1);
+q1 = Brobot.ikcon(T);
 t2 = transl(PX,PY,PZ);
-q2 = Brobot.ikcon(t2);
+q2 = Brobot.ikcon(invT);
+ 
 % moveqstart2 = jtraj(q1, q2 , steps);
 % robot.animate(moveqstart2)
+
 steps = 2;
 while ~isempty(find(1 < abs(diff(rad2deg(jtraj(q1,q2,steps)))),1))
     steps = steps + 1;
 end
 qMatrix = jtraj(q1,q2,steps);
+
 % 2.7
 result = true(steps,1);
 for i = 1: steps
