@@ -52,7 +52,7 @@ function GUI_OpeningFcn(hObject, eventdata, handles, varargin)
 % handles    structure with handles and user data (see GUIDATA)
 % varargin   command line arguments to GUI (see VARARGIN)
 Brobot = plotBrobot;
-T = transl(0,-0.25,0.2);
+T = transl(0.2,0.15,0.2);
 q = Brobot.ikcon(T);
 scale = 0.5;
 workspace = [-1.2 1.2 -1.2 1.2 -0.6 1]; %boundary of the working environment 
@@ -184,7 +184,7 @@ function playButton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 disp('Brobot Activated!');
-Brobot = moveBrobot();
+moveBrobot;
 
 % --- Executes on button press in resumeButton.
 function resumeButton_Callback(hObject, eventdata, handles)
@@ -362,7 +362,7 @@ PY = str2double(handles.Pos_Y.String);
 PZ = str2double(handles.Pos_Z.String);
 
 Brobot = plotBrobot;
-T = transl(0,-0.25,0.2);
+T = transl(0.2,0.15,0.2);
 q = Brobot.ikcon(T);
 
 invT = transl(PX,PY,PZ);
@@ -648,7 +648,7 @@ plotOptions.plotFaces = false;
 [vertex,faces,faceNormals] = RectangularPrism([0.3,-0.3,-0.03073], [-0.25,0.3,0.4493],plotOptions);
 hold on
 %%
-t1 = transl(0,-0.25,0.2);
+t1 = transl(0.2,0.15,0.2);
 q1 = Brobot.ikcon(t1);
 t2 = transl(PX,PY,PZ);
 q2 = Brobot.ikcon(t2);
@@ -723,7 +723,7 @@ centerpnt = [0.7,0,0];
 side = 0.2;
 plotOptions.plotFaces = true;
 %%
-t1 = transl(0,-0.25,0.2);
+t1 = transl(0.2,0.15,0.2);
 q1 = Brobot.ikcon(t1);
 t2 = transl(PX,PY,PZ);
 q2 = Brobot.ikcon(t2);

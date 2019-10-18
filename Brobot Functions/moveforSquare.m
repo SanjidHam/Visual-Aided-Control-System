@@ -1,13 +1,13 @@
 function [] = moveforSquare()
 demoObject2 = placeSquare;
 Brobot = plotBrobot;
-T = transl(0,-0.25,0.2);
+T = transl(0.2,0.15,0.2);
 q = Brobot.ikcon(T);
 %% Movement for Square
 steps = 20;
 
 %HOME
-TH = transl(0,-0.25,0.2);
+TH = transl(0.2,0.15,0.2);
 qH = Brobot.ikcon(TH);
 qMatrix = jtraj(q,qH,steps);
 Brobot.animate(qMatrix);
@@ -81,7 +81,7 @@ qMatrix = jtraj(q5,q6,steps);
 Brobot.animate(qMatrix);
 
 %return home
-T7 = transl(0,-0.25,0.2);
+T7 = transl(0.2,0.15,0.2);
 q7 = Brobot.ikcon(T7);
 qMatrix = jtraj(q6,q7,steps);
 Brobot.animate(qMatrix);
