@@ -32,21 +32,6 @@ for trajsteps = 1:size(qMatrix,1)
     drawnow;
     pause(0);
 end
-% %Line Check
-% intersectionLim()
-% result = IsIntersectionPointInsideTriangle(intersectP,triangleVerts)
-% s = 2;
-% while ~isempty(find(1 < abs(diff(rad2deg(jtraj(q1,q2,s)))),1))
-%     s = s + 1;
-% end
-% qMatrix = jtraj(q1,q2,s);
-% 
-% % 2.7
-% result = true(s,1);
-% for i = 1: s
-%     result(i) = IsCollision(Brobot,qMatrix(i,:),faces,vertex,faceNormals,false);
-%     Brobot.animate(qMatrix(i,:));
-% end
 
 T3 = transl(0.03,0.23,0.2);
 q3 = Brobot.ikcon(T3);
