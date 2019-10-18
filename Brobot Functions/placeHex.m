@@ -1,4 +1,4 @@
-classdef placeSquare
+classdef placeHex
 
 properties (SetAccess = private)
 objectVertexCount;
@@ -9,8 +9,8 @@ end
     
 methods
 %% Places Object on workspace
-function self = placeSquare()
-[f,v,data] = plyread('squareLarge.ply','tri');
+function self = placeHex()
+[f,v,data] = plyread('hexagon.ply','tri');
 self.objectVertexCount = size(v,1);
 midPoint = sum(v)/self.objectVertexCount;
 self.objectPose = eye(4); % creates the matrix 4x4 for partpose

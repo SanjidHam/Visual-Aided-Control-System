@@ -1,9 +1,9 @@
-function [] = moveforSquare()
-demoObject2 = placeSquare;
+function [] = moveforHex()
+demoObject2 = placeHex;
 Brobot = plotBrobot;
 T = transl(0,-0.25,0.2);
 q = Brobot.ikcon(T);
-%% Movement for Circle
+%% Movement for Hexagon
 steps = 20;
 
 %HOME
@@ -12,7 +12,7 @@ qH = Brobot.ikcon(TH);
 qMatrix = jtraj(q,qH,steps);
 Brobot.animate(qMatrix);
 
-disp ('Large Square Detected.');
+disp ('Hexagon Detected.');
 %Move for object
 T1 = transl(0.15,0.2,0.2);
 q1 = Brobot.ikcon(T1);

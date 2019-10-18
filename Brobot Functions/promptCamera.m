@@ -1,20 +1,20 @@
 %% Camera Prompt
 % 1 = LARGE CIRCLE
-% 2 = LARGE SQUARE
+% 2 = HEXAGON
 
 function promptCamera ()
 
 missingShape = input('Missing Shape:');
 if missingShape == 1
+    disp ('Large Circle Detected');    
     moveforCircle;
-%     disp ('CIR');
     pause (0.1);
     disp ('Camera checking for other missing shapes.');
     pause (0.5);
     promptCamera ();
 elseif missingShape == 2
-    moveforSquare;
-%     disp ('SQR');
+    disp ('Hexagon Detected');
+    moveforHex;
     pause (0.1);
     disp ('Camera checking for other missing shapes.');
     pause (0.5);

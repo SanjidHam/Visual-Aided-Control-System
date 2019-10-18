@@ -70,6 +70,8 @@ stopButton;
 fireExtinguisher;
 %Caution Poster
 cautionPoster;
+%Enclosure
+enclosure;
 %%BACKGROUND
 % Walls & Floor
 room;
@@ -79,6 +81,8 @@ tableSurface;
 %%Demo Accessories
 %Primary Tray
 primaryTray;
+%Secondary Tray
+secondaryTray;
 %Small Circle
 demoObject1 = placeCircle;
 demoObject2 = placeSquare;
