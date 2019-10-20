@@ -14,9 +14,9 @@ clear all
 cam = webcam(2);
 f = snapshot(cam);
 imshow(f)
-rgb = imcrop(f, [138 144 160 600]);
+rgb = imcrop(f, [138 144 160 600]); %crops snapshot with starting position and dimensions
 % figure
- imshow (rgb)
+imshow (rgb)
 
 % identifying the square shape
 getSquare(rgb)
