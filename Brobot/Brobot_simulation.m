@@ -39,9 +39,8 @@ secondaryTray;
 demoObject1 = placeCircle;
 demoObject2 = placeSquare;
 
-
 %% Camera Detection Starts
-disp ('Camera Detecting Missing Shape');
-pause (2);
+disp ('Camera Detecting Missing Shape'); %displays on Command Window
+pause (2); %delay
 promptCamera;
 end

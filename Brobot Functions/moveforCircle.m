@@ -9,7 +9,7 @@ steps = 20;
 %HOME
 TH = transl(0.2,0.15,0.2);
 qH = Brobot.ikcon(TH);
-qMatrix = jtraj(q,qH,steps);
+qMatrix = jtraj(q,qH,steps); %interpolation - Quintic Polynomial
 Brobot.animate(qMatrix);
 
 disp ('Large Circle Detected.');
@@ -24,7 +24,7 @@ q2 = Brobot.ikcon(T2);
 qMatrix = jtraj(q1,q2,steps);
 % Brobot.animate(qMatrix);
 %object moves
-for trajsteps = 1:size(qMatrix,1)
+for trajsteps = 1:size(qMatrix,1) %moves object alongside arm
     qSim = qMatrix(trajsteps,:);
     Brobot.animate(qSim);
     trnsf = Brobot.fkine(qSim);

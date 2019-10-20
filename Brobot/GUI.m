@@ -357,9 +357,9 @@ function invsimButton_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 disp ('3D Coordinates Provided');
 
-PX = str2double(handles.Pos_X.String);
-PY = str2double(handles.Pos_Y.String);
-PZ = str2double(handles.Pos_Z.String);
+PX = str2double(handles.Pos_X.String); % gets value for x pos
+PY = str2double(handles.Pos_Y.String); % gets value for y pos
+PZ = str2double(handles.Pos_Z.String); % gets value for z pos
 
 Brobot = plotBrobot;
 T = transl(0.2,0.15,0.2);

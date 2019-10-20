@@ -4,7 +4,7 @@
 
 function promptCamera ()
 
-missingShape = input('Missing Shape:');
+missingShape = input('Missing Shape:'); %prompts for alien input
 if missingShape == 1   
     moveforCircle;
     pause (0.1);

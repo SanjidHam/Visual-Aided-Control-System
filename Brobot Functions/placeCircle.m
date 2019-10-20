@@ -12,7 +12,7 @@ methods
 function self = placeCircle()
 [f,v,data] = plyread('circleLarge.ply','tri');
 self.objectVertexCount = size(v,1);
-midPoint = sum(v)/self.objectVertexCount;
+midPoint = sum(v)/self.objectVertexCount; % generates midpoint value for accurate motion
 self.objectPose = eye(4); % creates the matrix 4x4 for partpose
 self.vNew = v - repmat(midPoint,self.objectVertexCount,1);
 vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue]/255;
@@ -29,9 +29,9 @@ end
 
 %% Moves Object
 function moveObject(self,pose)
-forwardTR = makehgtform('translate',pose);
-self.objectPose = self.objectPose*forwardTR; %update the location
-updatedPoints = [self.objectPose * [self.vNew,ones(self.objectVertexCount,1)]']';  %update the location
+forwardTR = makehgtform('translate',pose); 
+self.objectPose = self.objectPose*forwardTR; %updates location
+updatedPoints = [self.objectPose * [self.vNew,ones(self.objectVertexCount,1)]']'; %updates location
 self.objectMesh.Vertices = updatedPoints(:,1:3);
 end
 
